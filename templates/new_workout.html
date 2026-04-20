@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>New Workout</h1>
+        <a href="{{ url_for('home') }}">
+            <button type="button">My Training</button>
+        </a>
+    </div>  
+
+    <div class="training-section"> 
+        <h2>New Workout</h2>
+
+        <form action="{{ url_for('add_workout') }}" method="POST" class="workout-form">
+            <label for="training">Training</label>
+            <input type="text" id="training" name="training" value="{{workout.exercise}}">
+
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" value = "{{workout.date}}">
+
+            <label for="duration">Duration</label>
+            <input type="text" id="duration" name="duration" value = "{{workout.duration}}">
+
+            <button type="submit">Save Workout</button>
+            <h1>{{error_message}}</h1>
+        </form>
+    </div>
+    
+
+</body>
+</html>

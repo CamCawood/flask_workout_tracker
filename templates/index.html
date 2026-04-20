@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Workout Tracker</h1>
+        <p>Track your workouts!</p>
+        <a href="{{ url_for('new_workout') }}">
+            <button>New Workout</button>
+        </a>
+    </div>
+
+    <div class = "training-section">
+        <h2>My Training</h2>
+        
+        <div class = "training-grid header">
+            <div>Training</div>
+            <div>Date</div>
+            <div>Duration</div>
+            <div>Edit</div>
+            <div>Delete</div>
+        </div>
+
+        <div class="training-grid row">
+            {% for item in file%}
+                <div>{{item.exercise}}</div>
+                <div>{{item.date}}</div>
+                <div>{{item.duration}}</div>
+                <div>
+                    <form action="{{ url_for('edit_workout') }}" method="POST">
+                        <input type="hidden" name="workout_index" value="{{ loop.index0 }}">
+                        <button type="submit" class="action-button">Edit</button>
+                    </form>
+                </div>
+
+                <div>
+                    <form action="{{ url_for('delete_workout') }}" method="POST">
+                        <input type="hidden" name="workout_index" value="{{ loop.index0 }}">
+                        <button type="submit" class="action-button">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    
+    
+
+</body>
+</html>
